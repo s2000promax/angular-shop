@@ -9,6 +9,7 @@ interface ImportMetaEnv {
    */
   readonly NG_APP_ENV: string;
   readonly NG_APP_FIREBASE_API_KEY: string;
+  readonly NG_APP_FIREBASE_DB_URL: string;
   readonly APP_PORT: string;
   // Add your environment variables below
   // readonly NG_APP_API_URL: string;
