@@ -18,7 +18,7 @@ import { ProductComponent } from './product/product.component';
     MainPageComponent,
     ProductPageComponent,
     CartPageComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +30,7 @@ import { ProductComponent } from './product/product.component';
     multi: true,
     useClass: AuthInterceptor
   }],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
