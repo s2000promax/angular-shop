@@ -11,7 +11,6 @@ import { ProductInterface } from '../shared/types/product.interface';
 })
 export class ProductPageComponent implements OnInit {
   product$!: Observable<ProductInterface>
-  loading: any;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute

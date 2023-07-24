@@ -48,4 +48,12 @@ export class ProductService {
         }
       }))
   }
+
+  removeById(id: string): Observable<null> {
+    return this.http.delete<null>(`${environment.fbDbUrl}/products/${id}.json`)
+  }
+
+  update(product: ProductInterface){
+    return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
+  }
 }
