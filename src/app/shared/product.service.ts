@@ -16,12 +16,12 @@ export class ProductService {
   create(product: ProductInterface) {
 
     return this.http.post(`${environment.fbDbUrl}/products.json`, product)
-      .pipe(map((response: FbResponseInterface) => {
-        return {
-          ...product,
-          id: response.name,
-          date: product.date,
-        }
-      }))
+      // .pipe(map((response: FbResponseInterface) => {
+      //   return {
+      //     ...product,
+      //     id: response.name,
+      //     date: product.date,
+      //   }
+      // }))
   }
 }

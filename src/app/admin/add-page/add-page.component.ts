@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Form } from '../../shared/types/form.type';
 import { ProductInterface } from '../../shared/types/product.interface';
 import { ProductService } from '../../shared/product.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-page',
@@ -16,6 +17,7 @@ export class AddPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class AddPageComponent implements OnInit {
      if (this.form.invalid) {
        return;
      }
+     this.submitted = true;
 
    const product: ProductInterface = {
        ...this.form.getRawValue(),
@@ -41,6 +44,9 @@ export class AddPageComponent implements OnInit {
      console.log(product)
     this.productService.create(product).subscribe(response => {
       console.log(response)
+      this.form.reset();
+      this.submitted = false;
+      this.router.navigate(['/']);
     })
    }
 }
