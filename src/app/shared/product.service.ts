@@ -54,6 +54,7 @@ export class ProductService {
   }
 
   update(product: ProductInterface){
+    console.log('New', product)
     return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
   }
 }
