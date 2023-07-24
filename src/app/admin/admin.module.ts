@@ -10,16 +10,17 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { authGuard } from '../shared/auth.guard';
 
 const routes: Routes = [
   {
     path: '', component: AdminLayoutComponent, children: [
       { path: '', redirectTo: '/admin/login', pathMatch: 'full'},
       { path: 'login', component: LoginPageComponent },
-      { path: 'dashboard', component: DashboardPageComponent },
-      { path: 'add', component: AddPageComponent },
-      { path: 'orders', component: OrdersPageComponent },
-      { path: 'product/:id/edit', component: EditPageComponent },
+      { path: 'dashboard', component: DashboardPageComponent, canActivate: [authGuard] },
+      { path: 'add', component: AddPageComponent, canActivate: [authGuard] },
+      { path: 'orders', component: OrdersPageComponent, canActivate: [authGuard] },
+      { path: 'product/:id/edit', component: EditPageComponent, canActivate: [authGuard] },
     ]
   }
 ];
