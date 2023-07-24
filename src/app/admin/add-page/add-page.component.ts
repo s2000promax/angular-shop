@@ -11,7 +11,7 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./add-page.component.scss']
 })
 export class AddPageComponent implements OnInit {
-  form!: FormGroup<Form<ProductInterface>>;
+  form!: FormGroup<Form<Omit<ProductInterface, 'id' | 'date'>>>;
   submitted: boolean = false;
 
   constructor(
@@ -37,11 +37,10 @@ export class AddPageComponent implements OnInit {
      }
      this.submitted = true;
 
-   const product: ProductInterface = {
+   const product: Omit<ProductInterface, "id"> = {
        ...this.form.getRawValue(),
      date: new Date(),
    };
-     console.log(product)
     this.productService.create(product).subscribe(response => {
       console.log(response)
       this.form.reset();
