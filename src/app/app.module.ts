@@ -10,6 +10,7 @@ import { CartPageComponent } from './cart-page/cart-page.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ProductComponent } from './product/product.component';
+import { SortingPipe } from './shared/sorting.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProductComponent } from './product/product.component';
     ProductPageComponent,
     CartPageComponent,
     ProductComponent,
+    SortingPipe,
   ],
   imports: [
     BrowserModule,

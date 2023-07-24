@@ -10,7 +10,7 @@ import { ProductInterface } from '../shared/types/product.interface';
 })
 export class MainPageComponent implements OnInit {
   products$!: Observable<ProductInterface[]>;
-  constructor(private productService: ProductService) {}
+  constructor(public productService: ProductService) {}
 
   ngOnInit() {
     this.products$ = this.productService.getAll();

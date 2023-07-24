@@ -14,6 +14,7 @@ export interface ResponseProductInterface extends ProductInterface {
   providedIn: 'root'
 })
 export class ProductService {
+  type: string = 'Phone';
 
   constructor(private http: HttpClient) {
   }
@@ -53,8 +54,12 @@ export class ProductService {
     return this.http.delete<null>(`${environment.fbDbUrl}/products/${id}.json`)
   }
 
-  update(product: ProductInterface){
+  update(product: ProductInterface) {
     console.log('New', product)
     return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
+  }
+
+  setType(type: string) {
+    this.type = type;
   }
 }
