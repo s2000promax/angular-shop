@@ -10,7 +10,7 @@
       <a [routerLink]="['/admin', 'add']">Add product</a>
     </li>
     <li routerLinkActive="active">
-      <a [routerLink]="['/admin', '']">Logout</a>
+      <a href="#" (click)="logout($event)">Logout</a>
     </li>
     <li routerLinkActive="active">
       <a [routerLink]="['/admin', 'login']">Login</a>
