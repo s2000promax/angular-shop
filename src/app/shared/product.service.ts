@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
 import { FbResponseInterface } from './types/fb.response.interface';
 import { ProductResponseInterface } from './types/product.response.interface';
 
-export interface ResponseProductInterface extends ProductInterface{
+export interface ResponseProductInterface extends ProductInterface {
   id: string;
 }
 
@@ -15,11 +15,12 @@ export interface ResponseProductInterface extends ProductInterface{
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   create(product: Omit<ProductInterface, 'id'>): Observable<ProductInterface> {
     return this.http.post<FbResponseInterface>(`${environment.fbDbUrl}/products.json`, product)
-      .pipe(map((response ) => {
+      .pipe(map((response) => {
         return {
           ...product,
           id: response.name,
@@ -35,6 +36,16 @@ export class ProductService {
           ...response[key],
           id: key,
         }))
+      }))
+  }
+
+  getById(id: string): Observable<ProductInterface> {
+    return this.http.get<ProductInterface>(`${environment.fbDbUrl}/products/${id}.json`)
+      .pipe(map((response) => {
+        return {
+          ...response,
+          id,
+        }
       }))
   }
 }
