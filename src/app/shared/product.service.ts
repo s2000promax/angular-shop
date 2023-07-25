@@ -6,15 +6,12 @@ import { map, Observable } from 'rxjs';
 import { FbResponseInterface } from './types/fb.response.interface';
 import { ProductResponseInterface } from './types/product.response.interface';
 
-export interface ResponseProductInterface extends ProductInterface {
-  id: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   type: string = 'Phone';
+  cartProducts: ProductInterface[] = [];
 
   constructor(private http: HttpClient) {
   }
@@ -55,11 +52,14 @@ export class ProductService {
   }
 
   update(product: ProductInterface) {
-    console.log('New', product)
     return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
   }
 
   setType(type: string) {
     this.type = type;
+  }
+
+  addProduct (product: ProductInterface) {
+    this.cartProducts.push(product)
   }
 }

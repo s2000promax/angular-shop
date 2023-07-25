@@ -22,4 +22,9 @@ export class ProductPageComponent implements OnInit {
         return this.productService.getById(params['id'])
       }))
   }
+
+  addProduct(product: ProductInterface) {
+    this.productService.addProduct(product)
+
+  }
 }
