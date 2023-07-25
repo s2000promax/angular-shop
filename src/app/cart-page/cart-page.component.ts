@@ -25,6 +25,7 @@ export interface CartInterface {
 export class CartPageComponent implements OnInit {
   cartProducts: ProductInterface[] = []
   totalPrice: number = 0
+  added: string = '';
 
   form! : FormGroup<Form<DeliveryInterface>>;
   submitted: boolean = false
@@ -51,12 +52,12 @@ export class CartPageComponent implements OnInit {
 
   submit() {
     if (this.form.invalid) {
-      return
+      return;
     }
 
     this.submitted = true
 
-    const order: OrderInterface = {
+    const order: Omit<OrderInterface, 'id'> = {
       ...this.form.getRawValue(),
       orders: this.cartProducts,
       price: this.totalPrice.toString(),
@@ -65,6 +66,7 @@ export class CartPageComponent implements OnInit {
 
     this.orderService.create(order).subscribe( res => {
       this.form.reset()
+      this.added = 'Delivery is frame'
       this.submitted = false
     })
   }

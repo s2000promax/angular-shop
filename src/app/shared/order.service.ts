@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { FbResponseInterface } from './types/fb.response.interface';
 import { OrderInterface } from './types/order.interface';
 import { Observable } from 'rxjs';
+import { OrdersResponseInterface } from './types/orders.response.interface';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class OrderService {
 
   constructor(private  http : HttpClient) { }
 
-  create(order: OrderInterface): Observable<OrderInterface> {
+  create(order: Omit<OrderInterface, 'id'>): Observable<OrderInterface> {
     return this.http.post<FbResponseInterface>(`${environment.fbDbUrl}/orders.json`, order)
     .pipe(map( (res) => {
       return {
@@ -23,5 +24,21 @@ export class OrderService {
         date: new Date(order.date)
       }
     }))
+  }
+
+  getAll(): Observable<OrderInterface[]> {
+    return this.http.get<OrdersResponseInterface>(`${environment.fbDbUrl}/orders.json`)
+      .pipe(map(response => {
+        return Object.keys(response)
+          .map(key => ({
+            ...response[key],
+            id: key,
+            date: new Date(response[key].date)
+          }))
+      }))
+  }
+
+  removeById(id: string): Observable<null> {
+    return this.http.delete<null>(`${environment.fbDbUrl}/orders/${id}.json`)
   }
 }

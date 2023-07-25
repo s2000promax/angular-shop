@@ -1,6 +1,7 @@
 import { ProductInterface } from './product.interface';
 
 export interface OrderInterface {
+  id: string;
   name: string;
   phone: string;
   address: string;
